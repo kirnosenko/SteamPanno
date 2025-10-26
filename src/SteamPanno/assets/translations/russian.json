@@ -25,6 +25,9 @@
 		"ShowHoursOption4": "Вверху",
 		"ShowHoursOption5": "Вверху слева",
 		"ShowHoursOption6": "Вверху справа",
+		"ExcludeMissingGamesLbl": "Исключить утерянные игры",
+		"ExcludeMissingGamesOptionOff": "Нет",
+		"ExcludeMissingGamesOptionOn": "Да",
 		"GenerationTypes":
 		{
 			"DivideAndConquer": "Разделяй и властвуй",

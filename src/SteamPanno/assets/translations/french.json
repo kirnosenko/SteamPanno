@@ -25,6 +25,9 @@
 		"ShowHoursOption4": "Haut",
 		"ShowHoursOption5": "Haut gauche",
 		"ShowHoursOption6": "Haut droit",
+		"ExcludeMissingGamesLbl": "Exclure les jeux manquants",
+		"ExcludeMissingGamesOptionOff": "Désactivé",
+		"ExcludeMissingGamesOptionOn": "Activé",
 		"GenerationTypes":
 		{
 			"DivideAndConquer": "Diviser pour régner",

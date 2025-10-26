@@ -24,7 +24,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Title" type="HBoxContainer" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 150)
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_vertical = 0
 
@@ -240,8 +240,24 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 24
 clip_text = true
 
+[node name="ExcludeMissingGames" type="HBoxContainer" parent="VBoxContainer/Content"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="ExcludeMissingGamesLbl" type="Label" parent="VBoxContainer/Content/ExcludeMissingGames"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Exclude Missing Games"
+
+[node name="ExcludeMissingGamesValue" type="OptionButton" parent="VBoxContainer/Content/ExcludeMissingGames"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+clip_text = true
+
 [node name="Buttons" type="HBoxContainer" parent="VBoxContainer"]
-custom_minimum_size = Vector2(600, 200)
+custom_minimum_size = Vector2(600, 100)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0

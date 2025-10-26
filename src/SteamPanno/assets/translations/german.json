@@ -25,6 +25,9 @@
 		"ShowHoursOption4": "Oben",
 		"ShowHoursOption5": "Oben links",
 		"ShowHoursOption6": "Oben rechts",
+		"ExcludeMissingGamesLbl": "Fehlende Spiele ausschließen",
+		"ExcludeMissingGamesOptionOff": "Aus",
+		"ExcludeMissingGamesOptionOn": "Ein",
 		"GenerationTypes":
 		{
 			"DivideAndConquer": "Teile und Herrsche",

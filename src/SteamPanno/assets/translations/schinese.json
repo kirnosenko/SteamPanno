@@ -25,6 +25,9 @@
 		"ShowHoursOption4": "顶部",
 		"ShowHoursOption5": "左上角",
 		"ShowHoursOption6": "右上角",
+		"ExcludeMissingGamesLbl": "排除缺失的游戏",
+		"ExcludeMissingGamesOptionOff": "关闭",
+		"ExcludeMissingGamesOptionOn": "开启",
 		"GenerationTypes":
 		{
 			"DivideAndConquer": "分治法",

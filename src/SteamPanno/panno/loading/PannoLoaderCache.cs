@@ -99,13 +99,13 @@ namespace SteamPanno.panno.loading
 			var profile = ProfileSnapshotManager.Instance.GetProfile(steamId);
 			if (profile != null)
 			{
-				var lastSnapshot = profile.GetLastSnapshot();
-				if (lastSnapshot != null)
+				var lastSnapshotTimestamp = profile.GetLastSnapshotTimestamp();
+				if (lastSnapshotTimestamp.HasValue)
 				{
-					var profileDate = DateExtensions.TimestampToLocalDateTime(lastSnapshot.Timestamp);
+					var profileDate = DateExtensions.TimestampToLocalDateTime(lastSnapshotTimestamp.Value);
 					if ((DateTime.Now - profileDate).TotalHours < 1)
 					{
-						var lastFullSnapshot = profile.GetFullSnapshot(lastSnapshot.Timestamp);
+						var lastFullSnapshot = profile.GetFullSnapshot(lastSnapshotTimestamp.Value);
 						profileGames = lastFullSnapshot.Games.ToArray();
 					}
 				}

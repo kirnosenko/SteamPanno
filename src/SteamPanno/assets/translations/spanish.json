@@ -25,6 +25,9 @@
 		"ShowHoursOption4": "Superior",
 		"ShowHoursOption5": "Superior Izquierdo",
 		"ShowHoursOption6": "Superior Derecho",
+		"ExcludeMissingGamesLbl": "Excluir juegos faltantes",
+		"ExcludeMissingGamesOptionOff": "Desactivado",
+		"ExcludeMissingGamesOptionOn": "Activado",
 		"GenerationTypes":
 		{
 			"DivideAndConquer": "Divide y Vencerás",

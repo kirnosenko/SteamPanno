@@ -338,7 +338,10 @@ namespace SteamPanno.scenes
 				var drawer = CreateDrawer(drawerType, pannoSize);
 
 				ProgressUpdate(0, Localization.Localize("ProfileLoading"));
-				PannoGame[] games = null;
+				PannoGame[] endingSnapshotGames = null;
+				PannoGame[] lastSnapshotGames = null;
+				PannoGame[] beginingSnapshotGames = null;
+				PannoGame[] currentGames = null;
 
 				if (SettingsManager.Instance.Settings.SelectedEndingSnapshots != null &&
 					SettingsManager.Instance.Settings.SelectedEndingSnapshots.TryGetValue(pannoSteamId, out var endingSnapshot))
@@ -349,24 +352,27 @@ namespace SteamPanno.scenes
 						var snapshot = profile.GetFullSnapshot(endingSnapshot);
 						if (snapshot != null)
 						{
-							games = snapshot.Games.ToArray();
+							endingSnapshotGames = snapshot.Games.ToArray();
 							pannoEndingTimestamp = endingSnapshot;
+							if (endingSnapshot == profile.GetLastSnapshotTimestamp())
+							{
+								lastSnapshotGames = endingSnapshotGames;
+							}
 						}
 					}
 				}
 
-				games ??= await loader.GetProfileGames(pannoSteamId, cancellationToken);
-				if (games == null)
+				if (endingSnapshotGames == null &&
+					!SettingsManager.Instance.Settings.ExcludeMissingGames)
 				{
-					Report(Localization.Localize("ProfileWasNotLoaded", pannoSteamId));
-					return;
-				}
-				else if (games.Length > 0 && games.All(x => x.HoursOnRecord == 0))
-				{
-					Report(Localization.Localize("ProfileIsPrivate", pannoSteamId));
-					if (SettingsManager.Instance.Settings.ProfileOption == 0)
+					var profile = ProfileSnapshotManager.Instance.GetProfile(pannoSteamId);
+					if (profile != null)
 					{
-						Report(Localization.Localize("ProfileIsPrivateAndLocal"));
+						var lastSnapshotDate = profile.GetLastSnapshotTimestamp();
+						if (lastSnapshotDate.HasValue)
+						{
+							lastSnapshotGames = profile.GetFullSnapshot(lastSnapshotDate.Value).Games.ToArray();
+						}
 					}
 				}
 
@@ -379,35 +385,68 @@ namespace SteamPanno.scenes
 						var snapshot = profile.GetFullSnapshot(beginingSnapshot);
 						if (snapshot != null)
 						{
-							var gamesBefore = snapshot.Games;
-							for (int i = 0; i < games.Length; i++)
-							{
-								var game = games[i];
-								var gameBefore = gamesBefore
-									.Where(x => x.Id == game.Id)
-									.SingleOrDefault();
-
-								if (gameBefore != null)
-								{
-									games[i] = new PannoGame()
-									{
-										Id = game.Id,
-										Name = game.Name,
-										HoursOnRecord = Math.Max(0, game.HoursOnRecord - gameBefore.HoursOnRecord),
-									};
-								}
-							}
+							beginingSnapshotGames = snapshot.Games.ToArray();
 							pannoBeginingTimestamp = beginingSnapshot;
 						}
 					}
 				}
 
+				if (endingSnapshotGames == null || SettingsManager.Instance.Settings.ExcludeMissingGames)
+				{
+					currentGames = await loader.GetProfileGames(pannoSteamId, cancellationToken);
+					if (currentGames == null)
+					{
+						Report(Localization.Localize("ProfileWasNotLoaded", pannoSteamId));
+						return;
+					}
+					else if (currentGames.Length > 0 && currentGames.All(x => x.HoursOnRecord == 0))
+					{
+						Report(Localization.Localize("ProfileIsPrivate", pannoSteamId));
+						if (SettingsManager.Instance.Settings.ProfileOption == 0)
+						{
+							Report(Localization.Localize("ProfileIsPrivateAndLocal"));
+						}
+					}
+				}
+
+				if (endingSnapshotGames != null)
+				{
+					currentGames = SettingsManager.Instance.Settings.ExcludeMissingGames
+						? endingSnapshotGames.Where(esg => currentGames.Any(cg => cg.Id == esg.Id)).ToArray()
+						: endingSnapshotGames;
+				}
+				else if (!SettingsManager.Instance.Settings.ExcludeMissingGames && lastSnapshotGames != null)
+				{
+					currentGames = currentGames.Concat(lastSnapshotGames.Where(lsg => !currentGames.Any(cg => cg.Id == lsg.Id))).ToArray();
+				}
+
+				if (beginingSnapshotGames != null)
+				{
+					for (int i = 0; i < currentGames.Length; i++)
+					{
+						var game = currentGames[i];
+						var gameBefore = beginingSnapshotGames
+							.Where(x => x.Id == game.Id)
+							.SingleOrDefault();
+
+						if (gameBefore != null)
+						{
+							currentGames[i] = new PannoGame()
+							{
+								Id = game.Id,
+								Name = game.Name,
+								HoursOnRecord = Math.Max(0, game.HoursOnRecord - gameBefore.HoursOnRecord),
+							};
+						}
+					}
+				}
+
 				var minimalHours = GetMinimalHours();
-				games = games
+				currentGames = currentGames
 					.Where(x => x.HoursOnRecord >= minimalHours)
 					.OrderByDescending(x => x.HoursOnRecord)
 					.ToArray();
-				if (games.Length == 0)
+				if (currentGames.Length == 0)
 				{
 					Report(Localization.Localize("NoGamesMeetTheGivenCriteria"));
 					return;
@@ -415,7 +454,7 @@ namespace SteamPanno.scenes
 
 				ProgressUpdate(0, Localization.Localize("PannoLayoutGeneration"));
 				var pannoStructure = await generator.Generate(
-					games.ToArray(),
+					currentGames.ToArray(),
 					new Rect2I(0, 0, pannoSize.X, pannoSize.Y));
 
 				ProgressStart(false);

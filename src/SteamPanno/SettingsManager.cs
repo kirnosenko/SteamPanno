@@ -36,6 +36,7 @@ namespace SteamPanno
 			public int GenerationMethodOption { get; set; }
 			public int OutpaintingMethodOption { get; set; } = 2;
 			public ShowHoursOptions ShowHoursOption { get; set; }
+			public bool ExcludeMissingGames { get; set; }
 
 			// hidden settings
 			public bool ShowConfigOnStart { get; set; } = false;

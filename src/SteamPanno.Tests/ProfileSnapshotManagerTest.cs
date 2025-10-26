@@ -53,7 +53,7 @@ namespace SteamPanno
 			var profile2 = manager.GetProfile("123");
 
 			profile2.ShouldBe(profile1);
-			profile2.GetLastSnapshot().Games.First().Id.ShouldBe(10);
+			profile2.GetIncrementalSnapshots().First().Games.First().Id.ShouldBe(10);
 			storage.ReceivedCalls().Count().ShouldBe(1);
 		}
 
