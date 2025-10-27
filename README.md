@@ -2,8 +2,17 @@
 
 a visual representation of someone's Steam library
 
+<img src="/doc/panno.png" alt="SteamPanno" width="800"/>
+
 [![LicenseBadge](https://img.shields.io/github/license/kirnosenko/SteamPanno.svg)](https://raw.githubusercontent.com/kirnosenko/SteamPanno/master/LICENSE)
 [![Release](https://img.shields.io/github/v/release/kirnosenko/SteamPanno)](https://github.com/kirnosenko/SteamPanno/releases/latest)
+
+## Features
+
+ * Create Personalized Pannos: Generate a panno for yourself, your friends, or any Steam user with a public profile.
+ * Customizable Resolution: Set any resolution to fit your needs, whether it's for a wallpaper, avatar, or social media post.
+ * Multiple Generation Algorithms: Choose from a variety of layout styles to find the one you like best.
+ * Track Your Playtime: Monitor how your gaming habits evolve over different periods of time.
 
 ## Downloads
 
