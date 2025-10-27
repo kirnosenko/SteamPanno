@@ -2,6 +2,7 @@ using Godot;
 using SteamPanno.panno;
 using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -122,6 +123,50 @@ namespace SteamPanno.scenes
 		public void Clear()
 		{
 			pannoState = PannoState.Dirty;
+		}
+
+		public async Task<PannoGame[]> PreLoad(
+			PannoGame[] games,
+			PannoLoader loader,
+			IPannoObserver observer,
+			CancellationToken cancellationToken)
+		{
+			var progressLocker = new SemaphoreSlim(1, 1);
+
+			var current = 0;
+			var resultingGames = new List<PannoGame>();
+			await Parallel.ForEachAsync(
+				games,
+				new ParallelOptions
+				{
+					MaxDegreeOfParallelism = Math.Min(
+						games.Length,
+						Math.Min(
+							SettingsManager.Instance.Settings.MaxDegreeOfParallelism,
+							Math.Max(OS.GetProcessorCount(), 1))),
+					CancellationToken = cancellationToken,
+				},
+				async (game, ct) =>
+				{
+					var imageV = await loader.GetGameLogoV(game.Id, ct);
+
+					progressLocker.Wait(ct);
+					try
+					{
+						if (imageV != null)
+						{
+							resultingGames.Add(game);
+						}
+						current++;
+						observer.ProgressUpdate(((double)current / games.Length) * 100, $"{game.Name} ({current}/{games.Length})");
+					}
+					finally
+					{
+						progressLocker.Release();
+					}
+				});
+
+			return resultingGames.ToArray();
 		}
 
 		public async Task LoadAndDraw(

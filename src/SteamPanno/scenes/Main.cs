@@ -452,6 +452,21 @@ namespace SteamPanno.scenes
 					return;
 				}
 
+				if (SettingsManager.Instance.Settings.ExcludeDelistedGames)
+				{
+					ProgressStart(false);
+					currentGames = await panno.PreLoad(currentGames, loader, this, cancellationToken);
+					if (currentGames.Length == 0)
+					{
+						Report(Localization.Localize("NoGamesMeetTheGivenCriteria"));
+						return;
+					}
+					currentGames = currentGames
+						.OrderByDescending(x => x.HoursOnRecord)
+						.ToArray();
+				}
+
+				ProgressStart(true);
 				ProgressUpdate(0, Localization.Localize("PannoLayoutGeneration"));
 				var pannoStructure = await generator.Generate(
 					currentGames.ToArray(),

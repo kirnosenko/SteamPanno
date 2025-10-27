@@ -240,6 +240,22 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 24
 clip_text = true
 
+[node name="ExcludeDelistedGames" type="HBoxContainer" parent="VBoxContainer/Content"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="ExcludeDelistedGamesLbl" type="Label" parent="VBoxContainer/Content/ExcludeDelistedGames"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Exclude Delisted Games"
+
+[node name="ExcludeDelistedGamesValue" type="OptionButton" parent="VBoxContainer/Content/ExcludeDelistedGames"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+clip_text = true
+
 [node name="ExcludeMissingGames" type="HBoxContainer" parent="VBoxContainer/Content"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2

@@ -1,45 +1,45 @@
 ﻿<Project Sdk="Godot.NET.Sdk/4.5.0">
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <EnableDynamicLoading>true</EnableDynamicLoading>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-	<Platforms>AnyCPU</Platforms>
-	<IsWindows>$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::Windows)))</IsWindows>
-	<IsLinux>$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::Linux)))</IsLinux>
-	<IsOSX>$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::OSX)))</IsOSX>
-  </PropertyGroup>
-  <ItemGroup Condition=" '$(GodotTargetPlatform)' == 'windows' ">
-    <Reference Include="Facepunch.Steamworks.Win64">
-      <HintPath>addons\steam\windows\Facepunch.Steamworks.Win64.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup Condition=" '$(GodotTargetPlatform)' == 'macos' ">
-    <Reference Include="Facepunch.Steamworks.Posix">
-      <HintPath>addons\steam\macos\Facepunch.Steamworks.Posix.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup Condition=" '$(GodotTargetPlatform)' == 'linuxbsd' ">
-    <Reference Include="Facepunch.Steamworks.Posix">
-      <HintPath>addons\steam\linux\Facepunch.Steamworks.Posix.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="GitInfo" Version="2.3.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="SixLabors.ImageSharp" Version="3.1.11" />
-  </ItemGroup>
-  <Target Condition=" '$(GodotTargetPlatform)' == 'windows' " Name="PostBuildWindows" AfterTargets="PostBuildEvent">
-    <Exec Condition="'$(IsWindows)' == 'True'" Command="xcopy /Y &quot;$(GodotProjectDir)addons\steam\windows\steam_api64.dll&quot; &quot;$(GodotProjectDir)&quot;" />
-	<Exec Condition="'$(IsWindows)' != 'True'" Command="rsync -av &quot;$(GodotProjectDir)addons\steam\windows\steam_api64.dll&quot; &quot;$(GodotProjectDir)&quot;" />
-  </Target>
-  <Target Condition=" '$(GodotTargetPlatform)' == 'macos' " Name="PostBuildMacos" AfterTargets="PostBuildEvent">
-    <Exec Condition="'$(IsWindows)' == 'True'" Command="xcopy /Y &quot;$(GodotProjectDir)addons\steam\macos\libsteam_api.dylib&quot; &quot;$(GodotProjectDir)&quot;" />
-	<Exec Condition="'$(IsWindows)' != 'True'" Command="rsync -av &quot;$(GodotProjectDir)addons\steam\macos\libsteam_api.dylib&quot; &quot;$(GodotProjectDir)&quot;" />
-  </Target>
-  <Target Condition=" '$(GodotTargetPlatform)' == 'linuxbsd' " Name="PostBuildLinux" AfterTargets="PostBuildEvent">
-    <Exec Condition="'$(IsWindows)' == 'True'" Command="xcopy /Y &quot;$(GodotProjectDir)addons\steam\linux\libsteam_api.so&quot; &quot;$(GodotProjectDir)&quot;" />
-	<Exec Condition="'$(IsWindows)' != 'True'" Command="rsync -av &quot;$(GodotProjectDir)addons\steam\linux\libsteam_api.so&quot; &quot;$(GodotProjectDir)&quot;" />
-  </Target>
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<EnableDynamicLoading>true</EnableDynamicLoading>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<Platforms>AnyCPU</Platforms>
+		<IsWindows>$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::Windows)))</IsWindows>
+		<IsLinux>$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::Linux)))</IsLinux>
+		<IsOSX>$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::OSX)))</IsOSX>
+	</PropertyGroup>
+	<ItemGroup Condition=" '$(GodotTargetPlatform)' == 'windows' ">
+		<Reference Include="Facepunch.Steamworks.Win64">
+			<HintPath>addons\steam\windows\Facepunch.Steamworks.Win64.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+	<ItemGroup Condition=" '$(GodotTargetPlatform)' == 'macos' ">
+		<Reference Include="Facepunch.Steamworks.Posix">
+			<HintPath>addons\steam\macos\Facepunch.Steamworks.Posix.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+	<ItemGroup Condition=" '$(GodotTargetPlatform)' == 'linuxbsd' ">
+		<Reference Include="Facepunch.Steamworks.Posix">
+			<HintPath>addons\steam\linux\Facepunch.Steamworks.Posix.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="GitInfo" Version="2.3.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="SixLabors.ImageSharp" Version="3.1.11" />
+	</ItemGroup>
+	<Target Condition=" '$(GodotTargetPlatform)' == 'windows' " Name="PostBuildWindows" AfterTargets="PostBuildEvent">
+		<Exec Condition="'$(IsWindows)' == 'True' And !Exists('$(GodotProjectDir)steam_api64.dll')" Command="xcopy /Y &quot;$(GodotProjectDir)addons\steam\windows\steam_api64.dll&quot; &quot;$(GodotProjectDir)&quot;" />
+		<Exec Condition="'$(IsWindows)' != 'True' And !Exists('$(GodotProjectDir)steam_api64.dll')" Command="rsync -av &quot;$(GodotProjectDir)addons\steam\windows\steam_api64.dll&quot; &quot;$(GodotProjectDir)&quot;" />
+	</Target>
+	<Target Condition=" '$(GodotTargetPlatform)' == 'macos' " Name="PostBuildMacos" AfterTargets="PostBuildEvent">
+		<Exec Condition="'$(IsWindows)' == 'True' And !Exists('$(GodotProjectDir)libsteam_api.dylib')" Command="xcopy /Y &quot;$(GodotProjectDir)addons\steam\macos\libsteam_api.dylib&quot; &quot;$(GodotProjectDir)&quot;" />
+		<Exec Condition="'$(IsWindows)' != 'True' And !Exists('$(GodotProjectDir)libsteam_api.dylib')" Command="rsync -av &quot;$(GodotProjectDir)addons\steam\macos\libsteam_api.dylib&quot; &quot;$(GodotProjectDir)&quot;" />
+	</Target>
+	<Target Condition=" '$(GodotTargetPlatform)' == 'linuxbsd' " Name="PostBuildLinux" AfterTargets="PostBuildEvent">
+		<Exec Condition="'$(IsWindows)' == 'True' And !Exists('$(GodotProjectDir)libsteam_api.so')" Command="xcopy /Y &quot;$(GodotProjectDir)addons\steam\linux\libsteam_api.so&quot; &quot;$(GodotProjectDir)&quot;" />
+		<Exec Condition="'$(IsWindows)' != 'True' And !Exists('$(GodotProjectDir)libsteam_api.so')" Command="rsync -av &quot;$(GodotProjectDir)addons\steam\linux\libsteam_api.so&quot; &quot;$(GodotProjectDir)&quot;" />
+	</Target>
 </Project>

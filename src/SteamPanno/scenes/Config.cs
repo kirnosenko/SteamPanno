@@ -41,6 +41,7 @@ namespace SteamPanno.scenes
 		private Control customMinimalHours;
 		private LineEdit customMinimalHoursValue;
 		private OptionButton showHoursValue;
+		private OptionButton excludeDelistedGamesValue;
 		private OptionButton excludeMissingGamesValue;
 
 		public Action<bool> OnExit { get; set; }
@@ -101,6 +102,10 @@ namespace SteamPanno.scenes
 			var showHoursLbl = GetNode<Label>("./VBoxContainer/Content/ShowHours/ShowHoursLbl");
 			showHoursLbl.Text = Localization.Localize($"{nameof(Config)}/{showHoursLbl.Name}");
 			showHoursValue = GetNode<OptionButton>("./VBoxContainer/Content/ShowHours/ShowHoursValue");
+
+			var excludeDelistedGamesLbl = GetNode<Label>("./VBoxContainer/Content/ExcludeDelistedGames/ExcludeDelistedGamesLbl");
+			excludeDelistedGamesLbl.Text = Localization.Localize($"{nameof(Config)}/{excludeDelistedGamesLbl.Name}");
+			excludeDelistedGamesValue = GetNode<OptionButton>("./VBoxContainer/Content/ExcludeDelistedGames/ExcludeDelistedGamesValue");
 
 			var excludeMissingGamesLbl = GetNode<Label>("./VBoxContainer/Content/ExcludeMissingGames/ExcludeMissingGamesLbl");
 			excludeMissingGamesLbl.Text = Localization.Localize($"{nameof(Config)}/{excludeMissingGamesLbl.Name}");
@@ -207,6 +212,10 @@ namespace SteamPanno.scenes
 			}
 			var showHoursOptionIndex = Math.Clamp((int)SettingsManager.Instance.Settings.ShowHoursOption, 0, showHoursValue.ItemCount - 1);
 			showHoursValue.Select(showHoursOptionIndex);
+
+			excludeDelistedGamesValue.AddItem(Localization.Localize($"{nameof(Config)}/ExcludeDelistedGamesOptionOff"));
+			excludeDelistedGamesValue.AddItem(Localization.Localize($"{nameof(Config)}/ExcludeDelistedGamesOptionOn"));
+			excludeDelistedGamesValue.Select(SettingsManager.Instance.Settings.ExcludeDelistedGames ? 1 : 0);
 
 			excludeMissingGamesValue.AddItem(Localization.Localize($"{nameof(Config)}/ExcludeMissingGamesOptionOff"));
 			excludeMissingGamesValue.AddItem(Localization.Localize($"{nameof(Config)}/ExcludeMissingGamesOptionOn"));
@@ -515,6 +524,7 @@ namespace SteamPanno.scenes
 				? customMinimalHoursValue.Text
 				: "0";
 			SettingsManager.Instance.Settings.ShowHoursOption = (SettingsManager.SettingsDto.ShowHoursOptions)showHoursValue.Selected;
+			SettingsManager.Instance.Settings.ExcludeDelistedGames = excludeDelistedGamesValue.Selected != 0;
 			SettingsManager.Instance.Settings.ExcludeMissingGames = excludeMissingGamesValue.Selected != 0;
 			SettingsManager.Instance.Save();
 
