@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Text.Json;
 using Godot;
 using Steamworks;
 
@@ -7,15 +9,18 @@ namespace SteamPanno
 {
 	public static class Steam
 	{
-		private static uint appID = 4026140;
-		private static bool init = false;
+		private static uint AppID = 4026140;
+		private static bool Init = false;
 
 		static Steam()
 		{
 			try
 			{
-				SteamClient.Init(appID, true);
-				init = true;
+				var appId = GetAppId();
+				GD.Print($"Steam App ID: {appId}");
+
+				SteamClient.Init(appId, true);
+				Init = true;
 				GD.Print($"Steam Name: {SteamClient.Name}, Id: {SteamClient.SteamId}, Lang: {SteamApps.GameLanguage}");
 			}
 			catch (Exception e)
@@ -26,7 +31,7 @@ namespace SteamPanno
 
 		public static bool IsReady()
 		{
-			return init && SteamClient.IsValid;
+			return Init && SteamClient.IsValid;
 		}
 
 		public static string GetSteamId()
@@ -89,6 +94,37 @@ namespace SteamPanno
 			{
 				GD.Print(e.Message);
 			}
+		}
+
+		private static uint GetAppId()
+		{
+			var appId = AppID;
+			var appIdPath = FileExtensions.GetAppIdPath();
+
+			if (File.Exists(appIdPath))
+			{
+				try
+				{
+					var json = File.ReadAllText(appIdPath);
+					appId = JsonSerializer.Deserialize<uint>(json);
+				}
+				catch
+				{
+				}
+			}
+			else
+			{
+				try
+				{
+					var json = JsonSerializer.Serialize(appId);
+					File.WriteAllText(appIdPath, json);
+				}
+				catch
+				{
+				}
+			}
+
+			return appId;
 		}
 	}
 }

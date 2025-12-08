@@ -57,5 +57,12 @@ namespace SteamPanno
 			
 			return settingsPath;
 		}
+
+		public static string GetAppIdPath()
+		{
+			var settingsPath = Path.Combine(GetDataPath(), "steamid.json");
+
+			return settingsPath;
+		}
 	}
 }
