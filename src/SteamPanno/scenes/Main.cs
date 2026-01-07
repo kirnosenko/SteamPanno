@@ -325,7 +325,7 @@ namespace SteamPanno.scenes
 
 				ProgressStart(true);
 				var pannoSize = GetPannoSize();
-				var loader = new PannoLoaderCache(new PannoLoaderOnline());
+				var loader = new PannoLoaderCache(new PannoLoaderOnlineAlt());
 				Type generatorType = MetaData.GenerationTypes
 					.Skip(SettingsManager.Instance.Settings.GenerationMethodOption)
 					.Select(x => x.Value)

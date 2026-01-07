@@ -23,6 +23,7 @@ namespace SteamPanno
 
 			public string Language { get; set; }
 
+			public string Key { get; set; }
 			public int ProfileOption { get; set; }
 			public string FriendProfile { get; set; }
 			public string CustomProfile { get; set; }

@@ -3,6 +3,7 @@
 	"Config":
 	{
 		"GenerationSettingsLbl": "Настройки генерации",
+		"ApiKeyLbl" : "Ключ Steam API",
 		"ProfileLbl": "Профиль Steam",
 		"ProfileOption0": "Мой профиль",
 		"ProfileOption1": "Профиль друга",

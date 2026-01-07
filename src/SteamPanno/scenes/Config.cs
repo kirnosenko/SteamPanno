@@ -22,6 +22,7 @@ namespace SteamPanno.scenes
 		private Dictionary<string, long> selectedBeginingSnapshots;
 		private Dictionary<string, long> selectedEndingSnapshots;
 
+		private LineEdit apiKeyValue;
 		private OptionButton profileValue;
 		private Control friendProfile;
 		private OptionButton friendProfileValue;
@@ -53,6 +54,10 @@ namespace SteamPanno.scenes
 
 			var generationSettingsLbl = GetNode<Label>("./VBoxContainer/Title/GenerationSettingsLbl");
 			generationSettingsLbl.Text = Localization.Localize($"{nameof(Config)}/{generationSettingsLbl.Name}");
+
+			var apiKeyLbl = GetNode<Label>("./VBoxContainer/Content/ApiKey/ApiKeyLbl");
+			apiKeyLbl.Text = Localization.Localize($"{nameof(Config)}/{apiKeyLbl.Name}");
+			apiKeyValue = GetNode<LineEdit>("./VBoxContainer/Content/ApiKey/ApiKeyValue");
 
 			var profileLbl = GetNode<Label>("./VBoxContainer/Content/Profile/ProfileLbl");
 			profileLbl.Text = Localization.Localize($"{nameof(Config)}/ProfileLbl");
@@ -110,6 +115,8 @@ namespace SteamPanno.scenes
 			var excludeMissingGamesLbl = GetNode<Label>("./VBoxContainer/Content/ExcludeMissingGames/ExcludeMissingGamesLbl");
 			excludeMissingGamesLbl.Text = Localization.Localize($"{nameof(Config)}/{excludeMissingGamesLbl.Name}");
 			excludeMissingGamesValue = GetNode<OptionButton>("./VBoxContainer/Content/ExcludeMissingGames/ExcludeMissingGamesValue");
+
+			apiKeyValue.Text = SettingsManager.Instance.Settings.Key;
 
 			var friends = Steam.GetFriends();
 			if (friends.Length > 0)
@@ -391,6 +398,10 @@ namespace SteamPanno.scenes
 		{
 			try
 			{
+				Callable.From(() => {
+					getProfileBtn.Visible = false;
+				}).CallDeferred();
+
 				var text = DisplayServer.ClipboardHas()
 					? DisplayServer.ClipboardGet()
 					: null;
@@ -407,7 +418,7 @@ namespace SteamPanno.scenes
 					else if (text.StartsWith("https://steamcommunity.com/id/"))
 					{
 						var name = text.Replace("https://steamcommunity.com/id/", "").TrimEnd('/');
-						var loader = new PannoLoaderOnline();
+						var loader = new PannoLoaderOnlineAlt();
 						var steamIdLoaded = await loader.GetProfileSteamId(name);
 						customProfileFromClipboard = steamIdLoaded ?? string.Empty;
 					}
@@ -415,6 +426,12 @@ namespace SteamPanno.scenes
 			}
 			catch
 			{
+			}
+			finally
+			{
+				Callable.From(() => {
+					getProfileBtn.Visible = true;
+				}).CallDeferred();
 			}
 		}
 
@@ -469,6 +486,7 @@ namespace SteamPanno.scenes
 		{
 			var maxTextureSize = RenderingServer.GetRenderingDevice().LimitGet(RenderingDevice.Limit.MaxTextureSize2D);
 
+			SettingsManager.Instance.Settings.Key = apiKeyValue.Text;
 			SettingsManager.Instance.Settings.ProfileOption = profileValue.Selected;
 			if (friendProfileValue.Text.TryParseSteamId(out var friendSteamId))
 			{

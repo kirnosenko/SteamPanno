@@ -44,6 +44,21 @@ size_flags_horizontal = 4
 size_flags_vertical = 0
 theme_override_constants/separation = 10
 
+[node name="ApiKey" type="HBoxContainer" parent="VBoxContainer/Content"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="ApiKeyLbl" type="Label" parent="VBoxContainer/Content/ApiKey"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "API Key"
+
+[node name="ApiKeyValue" type="LineEdit" parent="VBoxContainer/Content/ApiKey"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+
 [node name="Profile" type="HBoxContainer" parent="VBoxContainer/Content"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
@@ -52,7 +67,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "Steam Account Id"
+text = "Steam Profile"
 
 [node name="ProfileValue" type="OptionButton" parent="VBoxContainer/Content/Profile"]
 custom_minimum_size = Vector2(300, 0)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Godot;
+using System;
 using System.Globalization;
 using System.Linq;
 using System.Threading;
@@ -22,7 +23,7 @@ namespace SteamPanno.panno.loading
 		private const string GetLogoH = "https://steamcdn-a.akamaihd.net/steam/apps/{0}/capsule_616x353.jpg";
 		private const string GetLogoHeader = "https://steamcdn-a.akamaihd.net/steam/apps/{0}/header.jpg";
 
-		private static System.Net.Http.HttpClient httpClient;
+		protected System.Net.Http.HttpClient httpClient;
 
 		public PannoLoaderOnline()
 		{
@@ -30,7 +31,7 @@ namespace SteamPanno.panno.loading
 			httpClient.Timeout = TimeSpan.FromSeconds(SettingsManager.Instance.Settings.HttpTimeoutSeconds);
 		}
 
-		public async Task<string> GetProfileSteamId(string steamName)
+		public virtual async Task<string> GetProfileSteamId(string steamName)
 		{
 			var url = string.Format(GetProfileBySteamNameUrl, steamName);
 			using (var response = await httpClient.GetAsync(url))

@@ -3,6 +3,7 @@
 	"Config":
 	{
 		"GenerationSettingsLbl": "Generation Settings",
+		"ApiKeyLbl" : "Steam API Key",
 		"ProfileLbl": "Steam Profile",
 		"ProfileOption0": "My Profile",
 		"ProfileOption1": "My Friend's Profile",
