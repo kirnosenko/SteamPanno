@@ -4,7 +4,7 @@ echo ======================
 echo    WINDOWS EXPORTER
 echo ======================
 
-set GODOT_PATH="C:\Program Files\Godot_v4.5-stable_mono_win64\Godot_v4.5-stable_mono_win64.exe"
+set GODOT_PATH="C:\Program Files\Godot_v4.5.1-stable_mono_win64\Godot_v4.5.1-stable_mono_win64.exe"
 set PROJECT_PATH=%~dp0..\src\SteamPanno
 set EXPORT_PATH=%~dp0..\dist\windows-x64
 

@@ -51,6 +51,9 @@ namespace SteamPanno.scenes
 
 		public override void _Ready()
 		{
+			Vector2I screenSize = DisplayServer.ScreenGetSize();
+			GetWindow().ContentScaleSize = new Vector2I(screenSize.X, screenSize.Y);
+
 			SettingsManager.Instance.Load();
 
 			panno = GetNode<Panno>("./Panno");
