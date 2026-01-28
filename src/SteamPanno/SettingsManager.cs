@@ -10,6 +10,13 @@ namespace SteamPanno
 
 		public class SettingsDto
 		{
+			public enum HoursScalingOptions
+			{
+				LINEAR = 0,
+				LOGARITHMIC = 1,
+				CONSTANT = 2,
+			}
+
 			public enum ShowHoursOptions
 			{
 				OFF = 0,
@@ -34,6 +41,7 @@ namespace SteamPanno
 			public string CustomResolution { get; set; }
 			public int MinimalHoursOption { get; set; } = 1;
 			public string CustomMinimalHours { get; set; }
+			public HoursScalingOptions HoursScalingOption { get; set; }
 			public int GenerationMethodOption { get; set; }
 			public int OutpaintingMethodOption { get; set; } = 2;
 			public ShowHoursOptions ShowHoursOption { get; set; }

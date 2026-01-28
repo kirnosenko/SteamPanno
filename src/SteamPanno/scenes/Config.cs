@@ -41,6 +41,7 @@ namespace SteamPanno.scenes
 		private OptionButton minimalHoursValue;
 		private Control customMinimalHours;
 		private LineEdit customMinimalHoursValue;
+		private OptionButton hoursScalingValue;
 		private OptionButton showHoursValue;
 		private OptionButton excludeDelistedGamesValue;
 		private OptionButton excludeMissingGamesValue;
@@ -103,6 +104,10 @@ namespace SteamPanno.scenes
 			minimalHoursValue = GetNode<OptionButton>("./VBoxContainer/Content/MinimalHours/MinimalHoursValue");
 			customMinimalHours = GetNode<Control>("./VBoxContainer/Content/CustomMinimalHours");
 			customMinimalHoursValue = GetNode<LineEdit>("./VBoxContainer/Content/CustomMinimalHours/CustomMinimalHoursValue");
+
+			var hoursScalingLbl = GetNode<Label>("./VBoxContainer/Content/HoursScaling/HoursScalingLbl");
+			hoursScalingLbl.Text = Localization.Localize($"{nameof(Config)}/{hoursScalingLbl.Name}");
+			hoursScalingValue = GetNode<OptionButton>("./VBoxContainer/Content/HoursScaling/HoursScalingValue");
 
 			var showHoursLbl = GetNode<Label>("./VBoxContainer/Content/ShowHours/ShowHoursLbl");
 			showHoursLbl.Text = Localization.Localize($"{nameof(Config)}/{showHoursLbl.Name}");
@@ -211,6 +216,14 @@ namespace SteamPanno.scenes
 			minimalHoursValue.Select(minimalHoursOptionIndex);
 			HoursOptionSelected(minimalHoursOptionIndex);
 			customMinimalHoursValue.Text = SettingsManager.Instance.Settings.CustomMinimalHours;
+
+			for (int i = 0; i <= 2; i++)
+			{
+				var text = Localization.Localize($"{nameof(Config)}/HoursScalingOption{i}");
+				hoursScalingValue.AddItem(text);
+			}
+			var hoursScalingOptionIndex = Math.Clamp((int)SettingsManager.Instance.Settings.HoursScalingOption, 0, hoursScalingValue.ItemCount - 1);
+			hoursScalingValue.Select(hoursScalingOptionIndex);
 
 			for (int i = 0; i <= 6; i++)
 			{
@@ -541,6 +554,7 @@ namespace SteamPanno.scenes
 			SettingsManager.Instance.Settings.CustomMinimalHours = decimal.TryParse(customMinimalHoursValue.Text, out _)
 				? customMinimalHoursValue.Text
 				: "0";
+			SettingsManager.Instance.Settings.HoursScalingOption = (SettingsManager.SettingsDto.HoursScalingOptions)hoursScalingValue.Selected;
 			SettingsManager.Instance.Settings.ShowHoursOption = (SettingsManager.SettingsDto.ShowHoursOptions)showHoursValue.Selected;
 			SettingsManager.Instance.Settings.ExcludeDelistedGames = excludeDelistedGamesValue.Selected != 0;
 			SettingsManager.Instance.Settings.ExcludeMissingGames = excludeMissingGamesValue.Selected != 0;

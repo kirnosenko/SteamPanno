@@ -41,23 +41,23 @@ namespace SteamPanno.panno.generation
 
 				if (games.Length > 2)
 				{
-					var gamesHalfHours = games.Sum(x => x.HoursOnRecord) / 2;
+					var gamesHalfHours = games.Sum(x => x.HoursOnRecordScaled) / 2;
 					var gamesFirstCounter = 1;
-					var gamesFirstHours = games[gamesFirstCounter - 1].HoursOnRecord;
+					var gamesFirstHours = games[gamesFirstCounter - 1].HoursOnRecordScaled;
 					var gamesSecondCounter = 1;
-					var gamesSecondHours = games[games.Length - gamesSecondCounter].HoursOnRecord;
+					var gamesSecondHours = games[games.Length - gamesSecondCounter].HoursOnRecordScaled;
 
 					while (gamesFirstCounter + gamesSecondCounter < games.Length)
 					{
 						if (gamesSecondCounter <= gamesFirstCounter || gamesSecondHours < gamesHalfHours)
 						{
 							gamesSecondCounter++;
-							gamesSecondHours += games[games.Length - gamesSecondCounter].HoursOnRecord;
+							gamesSecondHours += games[games.Length - gamesSecondCounter].HoursOnRecordScaled;
 						}
 						else
 						{
 							gamesFirstCounter++;
-							gamesFirstHours += games[gamesFirstCounter - 1].HoursOnRecord;
+							gamesFirstHours += games[gamesFirstCounter - 1].HoursOnRecordScaled;
 						}
 					}
 

@@ -49,13 +49,13 @@ custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 
 [node name="ApiKeyLbl" type="Label" parent="VBoxContainer/Content/ApiKey"]
-custom_minimum_size = Vector2(300, 0)
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "API Key"
 
 [node name="ApiKeyValue" type="LineEdit" parent="VBoxContainer/Content/ApiKey"]
-custom_minimum_size = Vector2(300, 0)
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 
@@ -64,13 +64,13 @@ custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 
 [node name="ProfileLbl" type="Label" parent="VBoxContainer/Content/Profile"]
-custom_minimum_size = Vector2(300, 0)
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Steam Profile"
 
 [node name="ProfileValue" type="OptionButton" parent="VBoxContainer/Content/Profile"]
-custom_minimum_size = Vector2(300, 0)
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 clip_text = true
@@ -80,12 +80,12 @@ custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 
 [node name="FriendProfileLbl" type="Label" parent="VBoxContainer/Content/FriendProfile"]
-custom_minimum_size = Vector2(300, 0)
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 
 [node name="FriendProfileValue" type="OptionButton" parent="VBoxContainer/Content/FriendProfile"]
-custom_minimum_size = Vector2(300, 0)
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 clip_text = true
@@ -95,12 +95,12 @@ custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 
 [node name="CustomProfileLbl" type="Label" parent="VBoxContainer/Content/CustomProfile"]
-custom_minimum_size = Vector2(300, 0)
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 
 [node name="CustomProfilePanel" type="HBoxContainer" parent="VBoxContainer/Content/CustomProfile"]
-custom_minimum_size = Vector2(300, 0)
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 
 [node name="CustomProfileValue" type="LineEdit" parent="VBoxContainer/Content/CustomProfile/CustomProfilePanel"]
@@ -120,13 +120,13 @@ custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 
 [node name="BeginingSnapshotLbl" type="Label" parent="VBoxContainer/Content/BeginingSnapshot"]
-custom_minimum_size = Vector2(300, 0)
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Begining Snapshot"
 
 [node name="BeginingSnapshotValue" type="OptionButton" parent="VBoxContainer/Content/BeginingSnapshot"]
-custom_minimum_size = Vector2(300, 0)
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 clip_text = true
@@ -136,13 +136,13 @@ custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 
 [node name="EndingSnapshotLbl" type="Label" parent="VBoxContainer/Content/EndingSnapshot"]
-custom_minimum_size = Vector2(300, 0)
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Ending Snapshot"
 
 [node name="EndingSnapshotValue" type="OptionButton" parent="VBoxContainer/Content/EndingSnapshot"]
-custom_minimum_size = Vector2(300, 0)
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 clip_text = true
@@ -152,13 +152,13 @@ custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 
 [node name="PannoResolutionLbl" type="Label" parent="VBoxContainer/Content/PannoResolution"]
-custom_minimum_size = Vector2(300, 0)
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Panno Resolution"
 
 [node name="PannoResolutionValue" type="OptionButton" parent="VBoxContainer/Content/PannoResolution"]
-custom_minimum_size = Vector2(300, 0)
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 clip_text = true
@@ -168,12 +168,12 @@ custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 
 [node name="CustomPannoResolutionLbl" type="Label" parent="VBoxContainer/Content/CustomPannoResolution"]
-custom_minimum_size = Vector2(300, 0)
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 
 [node name="CustomPannoResolutionValue" type="LineEdit" parent="VBoxContainer/Content/CustomPannoResolution"]
-custom_minimum_size = Vector2(300, 0)
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 
@@ -182,13 +182,13 @@ custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 
 [node name="GenerationMethodLbl" type="Label" parent="VBoxContainer/Content/GenerationMethod"]
-custom_minimum_size = Vector2(300, 0)
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Generation Method"
 
 [node name="GenerationMethodValue" type="OptionButton" parent="VBoxContainer/Content/GenerationMethod"]
-custom_minimum_size = Vector2(300, 0)
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 clip_text = true
@@ -198,13 +198,13 @@ custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 
 [node name="OutpaintingMethodLbl" type="Label" parent="VBoxContainer/Content/OutpaintingMethod"]
-custom_minimum_size = Vector2(300, 0)
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Outpainting Method"
 
 [node name="OutpaintingMethodValue" type="OptionButton" parent="VBoxContainer/Content/OutpaintingMethod"]
-custom_minimum_size = Vector2(300, 0)
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 clip_text = true
@@ -214,13 +214,13 @@ custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 
 [node name="MinimalHoursLbl" type="Label" parent="VBoxContainer/Content/MinimalHours"]
-custom_minimum_size = Vector2(300, 0)
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Minimal Hours"
 
 [node name="MinimalHoursValue" type="OptionButton" parent="VBoxContainer/Content/MinimalHours"]
-custom_minimum_size = Vector2(300, 0)
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 clip_text = true
@@ -230,27 +230,43 @@ custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 
 [node name="CustomMinimalHoursLbl" type="Label" parent="VBoxContainer/Content/CustomMinimalHours"]
-custom_minimum_size = Vector2(300, 0)
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 
 [node name="CustomMinimalHoursValue" type="LineEdit" parent="VBoxContainer/Content/CustomMinimalHours"]
-custom_minimum_size = Vector2(300, 0)
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
+
+[node name="HoursScaling" type="HBoxContainer" parent="VBoxContainer/Content"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="HoursScalingLbl" type="Label" parent="VBoxContainer/Content/HoursScaling"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Hours Scaling"
+
+[node name="HoursScalingValue" type="OptionButton" parent="VBoxContainer/Content/HoursScaling"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+clip_text = true
 
 [node name="ShowHours" type="HBoxContainer" parent="VBoxContainer/Content"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 
 [node name="ShowHoursLbl" type="Label" parent="VBoxContainer/Content/ShowHours"]
-custom_minimum_size = Vector2(300, 0)
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Show Hours"
 
 [node name="ShowHoursValue" type="OptionButton" parent="VBoxContainer/Content/ShowHours"]
-custom_minimum_size = Vector2(300, 0)
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 clip_text = true
@@ -260,13 +276,13 @@ custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 
 [node name="ExcludeDelistedGamesLbl" type="Label" parent="VBoxContainer/Content/ExcludeDelistedGames"]
-custom_minimum_size = Vector2(300, 0)
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Exclude Delisted Games"
 
 [node name="ExcludeDelistedGamesValue" type="OptionButton" parent="VBoxContainer/Content/ExcludeDelistedGames"]
-custom_minimum_size = Vector2(300, 0)
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 clip_text = true
@@ -276,13 +292,13 @@ custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 
 [node name="ExcludeMissingGamesLbl" type="Label" parent="VBoxContainer/Content/ExcludeMissingGames"]
-custom_minimum_size = Vector2(300, 0)
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Exclude Missing Games"
 
 [node name="ExcludeMissingGamesValue" type="OptionButton" parent="VBoxContainer/Content/ExcludeMissingGames"]
-custom_minimum_size = Vector2(300, 0)
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 clip_text = true

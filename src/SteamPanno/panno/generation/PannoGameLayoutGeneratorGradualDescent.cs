@@ -18,7 +18,7 @@ namespace SteamPanno.panno.generation
 		public override ValueTask<PannoGameLayout[]> Generate(PannoGame[] games, Rect2I area)
 		{
 			var gamesQueue = new Queue<PannoGame>(games.OrderByDescending(x => x.HoursOnRecord).ToArray());
-			totalHours = gamesQueue.Sum(x => x.HoursOnRecord);
+			totalHours = gamesQueue.Sum(x => x.HoursOnRecordScaled);
 			totalArea = area.Size.X * area.Size.Y;
 			fixedHours = 0;
 			fixedArea = 0;
@@ -46,7 +46,7 @@ namespace SteamPanno.panno.generation
 				var areaHours = (decimal)areaArea / totalArea * totalHours;
 
 				var lastGame = games.Count == 1;
-				var areaIsNotBiggerThanItSupposedToBe = areaHours <= game.HoursOnRecord + deltaHours && areaHours < totalHours - fixedHours;
+				var areaIsNotBiggerThanItSupposedToBe = areaHours <= game.HoursOnRecordScaled + deltaHours && areaHours < totalHours - fixedHours;
 				var freeAreaIsEnoughToPlaceAllRemainGamesOneLevelDeeper = games.Count * (areaArea / 2) < totalArea - fixedArea;
 				var areaIsTooSmallToSplit = (area.PreferHorizontal() ? area.Size.X : area.Size.Y) < SettingsManager.Instance.Settings.MinGameAreaSize * 2;
 
@@ -57,9 +57,9 @@ namespace SteamPanno.panno.generation
 						&& depth == depthMax)
 				{
 					games.Dequeue();
-					fixedHours += game.HoursOnRecord;
+					fixedHours += game.HoursOnRecordScaled;
 					fixedArea += areaArea;
-					deltaHours += game.HoursOnRecord - areaHours;
+					deltaHours += game.HoursOnRecordScaled - areaHours;
 
 					return new PannoNodeLeaf()
 					{
