@@ -2,7 +2,7 @@
 
 a visual representation of someone's Steam library
 
-<img src="/doc/panno.png" alt="SteamPanno" width="800"/>
+<img src="/doc/panno.png" alt="SteamPanno"/>
 
 [![LicenseBadge](https://img.shields.io/github/license/kirnosenko/SteamPanno.svg)](https://raw.githubusercontent.com/kirnosenko/SteamPanno/master/LICENSE)
 [![Release](https://img.shields.io/github/v/release/kirnosenko/SteamPanno)](https://github.com/kirnosenko/SteamPanno/releases/latest)
@@ -25,15 +25,15 @@ You may download the latest release for your system:
 
 ### Windows
 
-- [steampanno-1.0.0-windows-x64](https://github.com/kirnosenko/SteamPanno/releases/download/1.0.0/steampanno-1.0.0-windows-x64.zip) (x64 binaries)
+- [steampanno-1.1.0-windows-x64](https://github.com/kirnosenko/SteamPanno/releases/download/1.1.0/steampanno-1.1.0-windows-x64.zip) (x64 binaries)
 
 ### Linux
 
-- [steampanno-1.0.0-linux-x64](https://github.com/kirnosenko/SteamPanno/releases/download/1.0.0/steampanno-1.0.0-linux-x64.zip) (x64 binaries)
+- [steampanno-1.1.0-linux-x64](https://github.com/kirnosenko/SteamPanno/releases/download/1.1.0/steampanno-1.1.0-linux-x64.zip) (x64 binaries)
 
 ### macOS
 
-- [steampanno-1.0.0-macos-uni](https://github.com/kirnosenko/SteamPanno/releases/download/1.0.0/steampanno-1.0.0-macos-uni.zip) (Apple Silicon and Apple Intel app package)
+- [steampanno-1.1.0-macos-uni](https://github.com/kirnosenko/SteamPanno/releases/download/1.1.0/steampanno-1.1.0-macos-uni.zip) (Apple Silicon and Apple Intel app package)
 
 ## How To Use It
 
