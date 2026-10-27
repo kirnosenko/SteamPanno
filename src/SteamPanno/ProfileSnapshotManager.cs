@@ -7,6 +7,7 @@ namespace SteamPanno
 	{
 		public static readonly ProfileSnapshotManager Instance = new ProfileSnapshotManager(new ProfileStorage());
 
+		private readonly object gate = new object();
 		private ProfileStorage storage;
 		private Dictionary<string, ProfileSnapshotCollection> profiles = new Dictionary<string, ProfileSnapshotCollection>();
 
@@ -17,36 +18,45 @@ namespace SteamPanno
 
 		public string[] GetProfileList()
 		{
-			return storage.GetProfileList();
+			lock (gate)
+			{
+				return storage.GetProfileList();
+			}
 		}
 
 		public ProfileSnapshotCollection GetProfile(string profileId)
 		{
-			if (!profiles.TryGetValue(profileId, out var profile))
+			lock (gate)
 			{
-				var data = storage.GetProfileData(profileId);
-				if (data != null)
+				if (!profiles.TryGetValue(profileId, out var profile))
 				{
-					profile = new ProfileSnapshotCollection(data);
-					profiles.Add(profileId, profile);
+					var data = storage.GetProfileData(profileId);
+					if (data != null)
+					{
+						profile = new ProfileSnapshotCollection(data);
+						profiles.Add(profileId, profile);
+					}
 				}
-			}
 
-			return profile;
+				return profile;
+			}
 		}
 
 		public void UpdateProfile(string profileId, ProfileSnapshot snapshot)
 		{
-			var profile = GetProfile(profileId);
-			if (profile == null)
+			lock (gate)
 			{
-				profile = new ProfileSnapshotCollection();
-				profiles.Add(profileId, profile);
-			}
+				var profile = GetProfile(profileId);
+				if (profile == null)
+				{
+					profile = new ProfileSnapshotCollection();
+					profiles.Add(profileId, profile);
+				}
 
-			if (profile.AddFullSnapshot(snapshot))
-			{
-				storage.SaveProfile(profileId, profile.GetIncrementalSnapshots().ToArray());
+				if (profile.AddFullSnapshot(snapshot))
+				{
+					storage.SaveProfile(profileId, profile.GetIncrementalSnapshots().ToArray());
+				}
 			}
 		}
 	}

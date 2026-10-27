@@ -71,7 +71,14 @@ namespace SteamPanno.scenes
 			customProfileValue = GetNode<LineEdit>("./VBoxContainer/Content/CustomProfile/CustomProfilePanel/CustomProfileValue");
 			customProfileValue.TextChanged += CustomAccountOptionChanged;
 			getProfileBtn = new ImageButtonController(GetNode<ImageButton>("./VBoxContainer/Content/CustomProfile/CustomProfilePanel/GetProfileBtn"));
-			getProfileBtn.OnClick = () => Task.Run(async () => await GetSteamIdBackThread());
+			getProfileBtn.OnClick = () =>
+			{
+				var text = DisplayServer.ClipboardHas() ? DisplayServer.ClipboardGet() : null;
+				if (text != null && text.Length < 1000)
+				{
+					Task.Run(async () => await GetSteamIdBackThread(text));
+				}
+			};
 
 			var beginingSnapshotLbl = GetNode<Label>("./VBoxContainer/Content/BeginingSnapshot/BeginingSnapshotLbl");
 			beginingSnapshotLbl.Text = Localization.Localize($"{nameof(Config)}/{beginingSnapshotLbl.Name}");
@@ -143,7 +150,7 @@ namespace SteamPanno.scenes
 				var text = Localization.Localize($"{nameof(Config)}/ProfileOption{i}");
 				profileValue.AddItem(text);
 			}
-			var profileOptionIndex = Math.Clamp(SettingsManager.Instance.Settings.ProfileOption, 0, profileValue.ItemCount);
+			var profileOptionIndex = Math.Clamp(SettingsManager.Instance.Settings.ProfileOption, 0, profileValue.ItemCount - 1);
 			if (Steam.GetSteamId() != null)
 			{
 				profileValue.SetItemDisabled(1, friends.Length == 0);
@@ -212,7 +219,7 @@ namespace SteamPanno.scenes
 			minimalHoursValue.AddItem("100");
 			minimalHoursValue.AddItem(Localization.Localize($"{nameof(Config)}/MinimalHoursOptionCustom"));
 			minimalHoursValue.ItemSelected += HoursOptionSelected;
-			var minimalHoursOptionIndex = Math.Clamp(SettingsManager.Instance.Settings.MinimalHoursOption, 0, minimalHoursValue.ItemCount);
+			var minimalHoursOptionIndex = Math.Clamp(SettingsManager.Instance.Settings.MinimalHoursOption, 0, minimalHoursValue.ItemCount - 1);
 			minimalHoursValue.Select(minimalHoursOptionIndex);
 			HoursOptionSelected(minimalHoursOptionIndex);
 			customMinimalHoursValue.Text = SettingsManager.Instance.Settings.CustomMinimalHours;
@@ -407,7 +414,7 @@ namespace SteamPanno.scenes
 			}
 		}
 
-		private async Task GetSteamIdBackThread()
+		private async Task GetSteamIdBackThread(string text)
 		{
 			try
 			{
@@ -415,26 +422,19 @@ namespace SteamPanno.scenes
 					getProfileBtn.Visible = false;
 				}).CallDeferred();
 
-				var text = DisplayServer.ClipboardHas()
-					? DisplayServer.ClipboardGet()
-					: null;
-
-				if (text != null && text.Length < 1000)
+				if (text.StartsWith("https://steamcommunity.com/profiles/"))
 				{
-					if (text.StartsWith("https://steamcommunity.com/profiles/"))
+					if (text.TryParseSteamId(out var steamIdParsed))
 					{
-						if (text.TryParseSteamId(out var steamIdParsed))
-						{
-							customProfileFromClipboard = steamIdParsed;
-						}
+						customProfileFromClipboard = steamIdParsed;
 					}
-					else if (text.StartsWith("https://steamcommunity.com/id/"))
-					{
-						var name = text.Replace("https://steamcommunity.com/id/", "").TrimEnd('/');
-						var loader = new PannoLoaderOnlineAlt();
-						var steamIdLoaded = await loader.GetProfileSteamId(name);
-						customProfileFromClipboard = steamIdLoaded ?? string.Empty;
-					}
+				}
+				else if (text.StartsWith("https://steamcommunity.com/id/"))
+				{
+					var name = text.Replace("https://steamcommunity.com/id/", "").TrimEnd('/');
+					var loader = new PannoLoaderOnlineAlt();
+					var steamIdLoaded = await loader.GetProfileSteamId(name);
+					customProfileFromClipboard = steamIdLoaded ?? string.Empty;
 				}
 			}
 			catch

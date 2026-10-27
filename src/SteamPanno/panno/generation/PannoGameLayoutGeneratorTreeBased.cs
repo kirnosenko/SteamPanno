@@ -60,7 +60,7 @@ namespace SteamPanno.panno.generation
 
 			public override int Count()
 			{
-				return first.Count() + second?.Count() ?? 0;
+				return first.Count() + (second?.Count() ?? 0);
 			}
 
 			public override int Depth()

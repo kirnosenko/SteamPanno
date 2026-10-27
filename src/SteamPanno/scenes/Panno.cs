@@ -34,22 +34,28 @@ namespace SteamPanno.scenes
 
 		public void SaveToFile(string filename)
 		{
-			if (pannoImage != null)
+			var image = textureOut?.Texture?.GetImage();
+			if (image != null)
 			{
-				textureOut.Texture.GetImage().SavePng(filename);
+				image.SavePng(filename);
 			}
 		}
 
 		public void SaveScreenshot()
 		{
-			if (pannoImage != null)
+			var image = textureOut?.Texture?.GetImage();
+			if (image == null)
 			{
-				var image = textureOut.Texture.GetImage();
-				var data = image.GetData();
-				var size = image.GetSize();
-
-				Steam.SaveScreenshot(image.GetData(), size.X, size.Y);
+				return;
 			}
+
+			if (image.GetFormat() != Image.Format.Rgb8)
+			{
+				image.Convert(Image.Format.Rgb8);
+			}
+
+			var size = image.GetSize();
+			Steam.SaveScreenshot(image.GetData(), size.X, size.Y);
 		}
 
 		public override void _Process(double delta)
@@ -101,6 +107,7 @@ namespace SteamPanno.scenes
 					if (textureOut != null)
 					{
 						RemoveChild(textureOut);
+						textureOut.QueueFree();
 						textureOut = null;
 						textureIn.Texture = null;
 						foreach (var pannoControlChild in textureIn.GetChildren())
@@ -108,6 +115,7 @@ namespace SteamPanno.scenes
 							if (pannoControlChild is RichTextLabel)
 							{
 								textureIn.RemoveChild(pannoControlChild);
+								pannoControlChild.QueueFree();
 							}
 						}
 					}

@@ -52,12 +52,14 @@ namespace SteamPanno.panno.loading
 			{
 				response.EnsureSuccessStatusCode();
 				var responseBody = await response.Content.ReadAsStringAsync();
-				var json = JsonDocument.Parse(responseBody);
-				var profileIdResponse = JsonSerializer.Deserialize<ProfileIdResponse>(json, JsonOptions);
-				
-				return profileIdResponse.Response.Success == 1
-					? profileIdResponse.Response.SteamId
-					: null;
+				using (var json = JsonDocument.Parse(responseBody))
+				{
+					var profileIdResponse = JsonSerializer.Deserialize<ProfileIdResponse>(json, JsonOptions);
+
+					return profileIdResponse.Response.Success == 1
+						? profileIdResponse.Response.SteamId
+						: null;
+				}
 			}
 		}
 
@@ -69,23 +71,25 @@ namespace SteamPanno.panno.loading
 				GetProfileBySteamIdUrlAlt,
 				SettingsManager.Instance.Settings.Key, steamId, "1");
 
-			using (var response = await httpClient.GetAsync(url))
+			using (var response = await httpClient.GetAsync(url, cancellationToken))
 			{
 				response.EnsureSuccessStatusCode();
-				var responseBody = await response.Content.ReadAsStringAsync();
-				var json = JsonDocument.Parse(responseBody);
-				var ownedGamesResponse = JsonSerializer.Deserialize<OwnedGamesResponse>(json, JsonOptions);
-				var ownedGames = ownedGamesResponse.Response.Games;
-
-				if (ownedGames != null && ownedGames.Length > 0)
+				var responseBody = await response.Content.ReadAsStringAsync(cancellationToken);
+				using (var json = JsonDocument.Parse(responseBody))
 				{
-					return ownedGamesResponse.Response.Games
-						.Select(x => new PannoGame()
-						{
-							Id = x.Appid,
-							Name = x.Name,
-							HoursOnRecord = (decimal)x.Playtime_Forever / 60,
-						}).ToArray();
+					var ownedGamesResponse = JsonSerializer.Deserialize<OwnedGamesResponse>(json, JsonOptions);
+					var ownedGames = ownedGamesResponse.Response.Games;
+
+					if (ownedGames != null && ownedGames.Length > 0)
+					{
+						return ownedGames
+							.Select(x => new PannoGame()
+							{
+								Id = x.Appid,
+								Name = x.Name,
+								HoursOnRecord = (decimal)x.Playtime_Forever / 60,
+							}).ToArray();
+					}
 				}
 			}
 

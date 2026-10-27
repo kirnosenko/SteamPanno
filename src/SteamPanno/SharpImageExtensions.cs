@@ -8,26 +8,24 @@ namespace SteamPanno
 	{
 		public static GodotImage DecodeJpg(this byte[] buffer)
 		{
+			using (var image = Image.Load(buffer))
 			using (var stream = new MemoryStream())
 			{
-				var image = Image.Load(buffer);
 				image.SaveAsBmp(stream);
-				stream.Seek(0, SeekOrigin.Begin);
 
 				var godotImage = new GodotImage();
-				var result = godotImage.LoadBmpFromBuffer(stream.GetBuffer());
-
-				if (result == Godot.Error.Ok)
+				var result = godotImage.LoadBmpFromBuffer(stream.ToArray());
+				if (result != Godot.Error.Ok)
 				{
-					if (godotImage.GetFormat() != GodotImage.Format.Rgb8)
-					{
-						godotImage.Convert(GodotImage.Format.Rgb8);
-					}
-
-					return godotImage;
+					return null;
 				}
 
-				return null;
+				if (godotImage.GetFormat() != GodotImage.Format.Rgb8)
+				{
+					godotImage.Convert(GodotImage.Format.Rgb8);
+				}
+
+				return godotImage;
 			}
 		}
 	}
