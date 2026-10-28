@@ -534,8 +534,10 @@ namespace SteamPanno.scenes
 					File.Delete(savePath);
 				}
 
-				panno.SaveToFile(savePath);
-				savedFileLabelText = $"[bgcolor=#000000ff]{Localization.Localize("PannoSaved", savePath)}[/bgcolor]";
+				if (panno.SaveToFile(savePath))
+				{
+					savedFileLabelText = $"[bgcolor=#000000ff]{Localization.Localize("PannoSaved", savePath)}[/bgcolor]";
+				}
 			}
 			catch (Exception e)
 			{
