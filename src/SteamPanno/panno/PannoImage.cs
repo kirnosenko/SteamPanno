@@ -40,12 +40,10 @@ namespace SteamPanno.panno
 
 			if (image.LoadJpgFromBuffer(buffer) != Error.Ok)
 			{
-				// godot jpg decoder has problems with some files
-				// so we use alternative decoder
-				image = buffer.DecodeJpg();
+				return null;
 			}
 			
-			return image != null ? PannoImage.Create(image) : null;
+			return PannoImage.Create(image);
 		}
 
 		public static implicit operator Image(PannoImage image)
