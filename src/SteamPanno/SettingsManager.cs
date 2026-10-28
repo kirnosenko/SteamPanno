@@ -76,13 +76,16 @@ namespace SteamPanno
 		{
 			get
 			{
-				if (!settingsByProfile.TryGetValue(profile, out var profileSettings))
+				lock (settingsByProfile)
 				{
-					profileSettings = new SettingsDto();
-					settingsByProfile[profile] = profileSettings;
-				}
+					if (!settingsByProfile.TryGetValue(profile, out var profileSettings))
+					{
+						profileSettings = new SettingsDto();
+						settingsByProfile[profile] = profileSettings;
+					}
 
-				return profileSettings;
+					return profileSettings;
+				}
 			}
 		}
 
