@@ -3,6 +3,7 @@
 	"Config":
 	{
 		"GenerationSettingsLbl": "Paramètres de génération",
+		"ApiKeyLbl": "Clé API Steam",
 		"ProfileLbl": "Profil Steam",
 		"ProfileOption0": "Mon profil",
 		"ProfileOption1": "Profil de mon ami",
@@ -17,6 +18,10 @@
 		"OutpaintingMethodLbl": "Méthode d'outpainting",
 		"MinimalHoursLbl": "Heures minimales",
 		"MinimalHoursOptionCustom": "Personnalisée",
+		"HoursScalingLbl": "Mise à l'échelle des heures",
+		"HoursScalingOption0": "Linéaire",
+		"HoursScalingOption1": "Logarithmique",
+		"HoursScalingOption2": "Constante",
 		"ShowHoursLbl": "Afficher les heures",
 		"ShowHoursOption0": "Désactivé",
 		"ShowHoursOption1": "Bas",

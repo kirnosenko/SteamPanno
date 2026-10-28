@@ -21,7 +21,7 @@
 		"HoursScalingLbl": "Масштаб часов",
 		"HoursScalingOption0": "Линейный",
 		"HoursScalingOption1": "Логарифмический",
-		"HoursScalingOption2": "Константа",
+		"HoursScalingOption2": "Постоянный",
 		"ShowHoursLbl": "Показывать часы",
 		"ShowHoursOption0": "Нет",
 		"ShowHoursOption1": "Внизу",
@@ -56,11 +56,11 @@
 	"Hours": "ч",
 	"ProfileWasNotSet": "Профиль Steam не указан.",
 	"ProfileWasNotLoaded": "Не удалось загрузить данные профиля Steam {0}.",
-	"ProfileIsPrivate": "Игровая статистика скрыта для профиля Steam {0}.",
-	"ProfileIsPrivateAndLocal": "Сделать вашу игровую статистику публичной можно в Настройках Безопасности профиля Steam. Также может потребоваться подождать несколько минут пока не обновится кэш Steam.",
+	"ProfileIsPrivate": "Сведения об играх скрыты в профиле Steam {0}.",
+	"ProfileIsPrivateAndLocal": "Сделать сведения об играх и время в игре публичными можно в настройках конфиденциальности профиля Steam. Также может потребоваться подождать несколько минут, пока не обновится кэш Steam.",
 	"ProfileLoading": "Загрузка профиля...",
 	"PannoLayoutGeneration": "Генерация макета...",
 	"PannoSaving": "Сохранение...",
 	"PannoSaved": "Файл сохранен: {0}",
-	"NoGamesMeetTheGivenCriteria": "Нет игр удовлетворящих заданным критериям."
+	"NoGamesMeetTheGivenCriteria": "Нет игр, удовлетворяющих заданным критериям."
 }

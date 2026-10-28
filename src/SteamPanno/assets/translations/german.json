@@ -3,6 +3,7 @@
 	"Config":
 	{
 		"GenerationSettingsLbl": "Generierungseinstellungen",
+		"ApiKeyLbl": "Steam-API-Schlüssel",
 		"ProfileLbl": "Steam-Profil",
 		"ProfileOption0": "Mein Profil",
 		"ProfileOption1": "Profil meines Freundes",
@@ -17,6 +18,10 @@
 		"OutpaintingMethodLbl": "Outpainting-Methode",
 		"MinimalHoursLbl": "Mindeststunden",
 		"MinimalHoursOptionCustom": "Benutzerdefiniert",
+		"HoursScalingLbl": "Stundenskalierung",
+		"HoursScalingOption0": "Linear",
+		"HoursScalingOption1": "Logarithmisch",
+		"HoursScalingOption2": "Konstant",
 		"ShowHoursLbl": "Stunden anzeigen",
 		"ShowHoursOption0": "Aus",
 		"ShowHoursOption1": "Unten",
@@ -48,7 +53,7 @@
 			"ResizeUnproportional": "Nicht proportional skalieren"
 		}
 	},
-	"Hours": "s",
+	"Hours": "h",
 	"ProfileWasNotSet": "Steam-Profil wurde nicht angegeben.",
 	"ProfileWasNotLoaded": "Steam-Profil {0} konnte nicht geladen werden.",
 	"ProfileIsPrivate": "Spieledetails sind im Steam-Profil {0} auf privat eingestellt.",
