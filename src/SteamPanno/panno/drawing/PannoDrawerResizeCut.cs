@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Godot;
 
 namespace SteamPanno.panno.drawing
@@ -35,7 +36,11 @@ namespace SteamPanno.panno.drawing
 				Mathf.Max((isize.Y - size.Y) / 2, 0));
 
 			src.Size = new Vector2I(isize.X, isize.Y);
-			var rect = new Rect2I(cut, isize - cut * 2);
+			var rect = new Rect2I(
+				cut,
+				new Vector2I(
+					Math.Min(size.X, isize.X - cut.X),
+					Math.Min(size.Y, isize.Y - cut.Y)));
 
 			Dest.Draw(src, rect, position);
 
