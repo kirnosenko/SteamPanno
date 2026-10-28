@@ -34,7 +34,8 @@
 		"GenerationTypes":
 		{
 			"DivideAndConquer": "分治法",
-			"GradualDescent": "渐进式"
+			"GradualDescent": "渐进式",
+			"Outward": "向外"
 		},
 		"OutpaintingTypes":
 		{

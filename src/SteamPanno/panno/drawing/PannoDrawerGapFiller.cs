@@ -9,7 +9,7 @@ namespace SteamPanno.panno.drawing
 	{
 		public PannoDrawerGapFiller(PannoImage dest, IPannoImageProcessor processor)
 			: base(dest, processor)
-		{			
+		{
 		}
 
 		public override async Task Draw(PannoImage src, Rect2I destArea)

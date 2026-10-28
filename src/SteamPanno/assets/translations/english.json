@@ -39,7 +39,8 @@
 		"GenerationTypes":
 		{
 			"DivideAndConquer": "Divide And Conquer",
-			"GradualDescent": "Gradual Descent"
+			"GradualDescent": "Gradual Descent",
+			"Outward": "Outward"
 		},
 		"OutpaintingTypes":
 		{

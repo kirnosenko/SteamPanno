@@ -34,7 +34,8 @@
 		"GenerationTypes":
 		{
 			"DivideAndConquer": "Diviser pour régner",
-			"GradualDescent": "Descente graduelle"
+			"GradualDescent": "Descente graduelle",
+			"Outward": "Vers l'extérieur"
 		},
 		"OutpaintingTypes":
 		{

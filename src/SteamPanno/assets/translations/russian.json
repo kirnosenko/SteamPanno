@@ -39,7 +39,8 @@
 		"GenerationTypes":
 		{
 			"DivideAndConquer": "Разделяй и властвуй",
-			"GradualDescent": "Последовательный спуск"
+			"GradualDescent": "Последовательный спуск",
+			"Outward": "От центра к краям"
 		},
 		"OutpaintingTypes":
 		{
