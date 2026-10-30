@@ -5,7 +5,7 @@ echo "====================="
 echo "   MACOS EXPORTER"
 echo "====================="
 
-GODOT_PATH=$HOME"/Applications/Godot_mono.app/Contents/MacOS/Godot"
+GODOT_PATH="/Applications/Godot_mono.app/Contents/MacOS/Godot"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_PATH="$SCRIPT_DIR/../src/SteamPanno"
 EXPORT_PATH="$SCRIPT_DIR/../dist/macos-uni"
